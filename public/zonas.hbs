@@ -1,0 +1,96 @@
+<div class="container-fluid">
+    <!-- Encabezado -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2><i class="bi bi-geo-alt text-primary"></i> Administración de Zonas</h2>
+                    <p class="text-muted">Gestiona las diferentes zonas del parque botánico</p>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarZona">
+                        <i class="bi bi-plus-circle"></i> Agregar Zona
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Zonas -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col" class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#if zonas}}
+                                    {{#each zonas}}
+                                    <tr>
+                                        <th scope="row">{{this.id}}</th>
+                                        <td>{{this.nombre}}</td>
+                                        <td>{{this.descripcion}}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-primary btn-sm me-1" title="Editar">
+                                                <i class="bi bi-pencil-square"></i> Editar
+                                            </button>
+                                            <button class="btn btn-danger btn-sm" title="Eliminar">
+                                                <i class="bi bi-trash"></i> Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                {{else}}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted py-4">
+                                            <i class="bi bi-inbox" style="font-size: 2rem;"></i>
+                                            <p class="mt-2">No hay zonas registradas. Haz clic en "Agregar Zona" para comenzar.</p>
+                                        </td>
+                                    </tr>
+                                {{/if}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Agregar Zona -->
+<div class="modal fade" id="modalAgregarZona" tabindex="-1" aria-labelledby="modalAgregarZonaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAgregarZonaLabel"><i class="bi bi-plus-circle"></i> Agregar Nueva Zona</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="/zonas/crear">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre de la Zona</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Jardín de Orquídeas" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Describe las características de esta zona"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-save"></i> Guardar Zona
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

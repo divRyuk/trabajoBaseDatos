@@ -11,9 +11,6 @@ module.exports = mongoose.model("Datos",dataSchema);
 
 
 
-
-
-
 /*
 "nombre":"";
 "direccion":"";
